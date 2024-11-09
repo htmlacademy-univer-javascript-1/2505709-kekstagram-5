@@ -16,10 +16,10 @@ const generateUserId = createRandomIdFromRangeGenerator(1, 1000);
 
 function createComment() {
   const comment = {
-    'id': generateUserId(),
-    'avatar': `img/avatar-${getRandomInteger(1, 6)}.svg`,
-    'message': createCommentMessage(),
-    'name': names[getRandomInteger(0, names.length - 1)]
+    id: generateUserId(),
+    avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+    message: createCommentMessage(),
+    name: names[getRandomInteger(0, names.length - 1)]
   };
   return comment;
 }
