@@ -1,11 +1,12 @@
 import { getRandomInteger } from './util.js';
 import { PhotoDiscriptionList } from './create-photo-discription.js';
-
+import { getComments } from './draw-comments.js';
 const pictureArea = document.querySelector('.pictures');
 const bigPictureWrap = document.querySelector('.big-picture');
 
 const body = document.querySelector('body');
 const bigPictureExitBtn = bigPictureWrap.querySelector('.big-picture__cancel');
+
 
 pictureArea.addEventListener('click', (evt)=>{
   if (evt.target.classList.contains('picture__img')){
@@ -26,15 +27,6 @@ const getPictureInfo = (data) => {
   pictureInfo.querySelector('.likes-count').textContent = data.likes;
 };
 
-const getComments = (data) => {
-  const commentsList = bigPictureWrap.querySelector('.social__comments').children;
-  for (let i = 0; i < commentsList.length;i++){
-    const element = commentsList[i];
-    element.querySelector('img').src = data.comments[i].avatar;
-    element.querySelector('p').textContent = data.comments[i].message;
-  }
-};
-
 const onDocumentKeydown = (evt) =>{
   if (evt.key === 'Escape'){
     evt.preventDefault();
@@ -53,12 +45,6 @@ function openBigPicture(picture){
   getPictureInfo(pictureData);
   getComments(pictureData);
 
-  const commentsCount = bigPictureWrap.querySelector('.social__comment-count');
-  commentsCount.classList.add('hidden');
-
-  const commentsLoaderBtn = bigPictureWrap.querySelector('.social__comments-loader');
-  commentsLoaderBtn.classList.add('hidden');
-
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
@@ -70,5 +56,5 @@ bigPictureExitBtn.addEventListener('click',()=>{
 function closeBigPicture(){
   bigPictureWrap.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener(onDocumentKeydown);
+  document.removeEventListener('keydown', onDocumentKeydown);
 }
