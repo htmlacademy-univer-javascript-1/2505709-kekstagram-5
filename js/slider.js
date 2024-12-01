@@ -1,4 +1,4 @@
-export const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) => {
+const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) => {
   noUiSlider.create(sliderElement, {
     range: {
       min: 0,
@@ -62,3 +62,4 @@ export const initSlider = (sliderElement, sliderContainer, effectValue, applyEff
 
   return updateSliderSettings;
 };
+export {initSlider};
