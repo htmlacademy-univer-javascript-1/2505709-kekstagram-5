@@ -2,6 +2,7 @@ const form = document.querySelector('.img-upload__form');
 const hashtagsInput = form.querySelector('.text__hashtags');
 const descriptionInput = form.querySelector('.text__description');
 
+
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'has-error',
@@ -86,11 +87,5 @@ descriptionInput.addEventListener('keydown', (evt) => {
   }
 });
 
-form.addEventListener('submit', (evt) => {
-  const isValid = pristine.validate();
-  if (!isValid) {
-    evt.preventDefault();
-    // eslint-disable-next-line no-alert
-    alert('Форма содержит ошибки');
-  }
-});
+
+export {pristine};
