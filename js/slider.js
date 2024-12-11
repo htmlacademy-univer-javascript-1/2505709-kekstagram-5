@@ -1,3 +1,4 @@
+//всё реализовано в module9-task1
 const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) => {
   noUiSlider.create(sliderElement, {
     range: {
