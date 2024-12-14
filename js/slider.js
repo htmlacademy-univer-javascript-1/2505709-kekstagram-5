@@ -1,4 +1,5 @@
-export const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) => {
+//всё реализовано в module9-task1
+const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) => {
   sliderContainer.classList.add('hidden');
   noUiSlider.create(sliderElement, {
     range: {
@@ -63,3 +64,4 @@ export const initSlider = (sliderElement, sliderContainer, effectValue, applyEff
 
   return updateSliderSettings;
 };
+export {initSlider};
