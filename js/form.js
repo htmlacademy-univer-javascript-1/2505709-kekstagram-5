@@ -42,6 +42,7 @@ const applyEffect = (intensity) => {
   }
 };
 
+sliderContainer.classList.add('hidden');
 const updateSliderSettings = initSlider(sliderElement, sliderContainer, effectValue, applyEffect);
 
 effectsFieldset.addEventListener('change', (evt) => {
@@ -79,6 +80,7 @@ function closeOverlay(){
   curImgScale = 1;
 
   currentEffect = 'none';
+  sliderContainer.classList.add('hidden');
   sliderElement.noUiSlider.updateOptions({
     range: { min: 0, max: 100 },
     start: 100,
