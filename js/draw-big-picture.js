@@ -1,5 +1,5 @@
 import { getRandomInteger } from './util.js';
-import { PhotoDiscriptionList } from './create-photo-discription.js';
+import { getData } from './api.js';
 import { getComments } from './draw-comments.js';
 const pictureArea = document.querySelector('.pictures');
 const bigPictureWrap = document.querySelector('.big-picture');
@@ -35,22 +35,24 @@ const onDocumentKeydown = (evt) =>{
 };
 
 function openBigPicture(picture){
-  const absolutePathToPicture = picture.querySelector('img').src;
-  const pictureData = PhotoDiscriptionList.find((photo) => photo.url === new URL(absolutePathToPicture).pathname.slice(1));
+  getData()
+    .then((PhotoDescriptionList) => {
+      const absolutePathToPicture = picture.querySelector('img').src;
+      const pictureData = PhotoDescriptionList.find((photo) => photo.url === new URL(absolutePathToPicture).pathname.slice(1));
 
-  bigPictureWrap.classList.remove('hidden');
-  body.classList.add('modal-open');
+      bigPictureWrap.classList.remove('hidden');
+      body.classList.add('modal-open');
 
-  getPhoto(pictureData);
-  getPictureInfo(pictureData);
-  getComments(pictureData);
+      getPhoto(pictureData);
+      getPictureInfo(pictureData);
+      getComments(pictureData);
 
-  document.addEventListener('keydown', onDocumentKeydown);
+      document.addEventListener('keydown', onDocumentKeydown);
+    });
 }
 
 bigPictureExitBtn.addEventListener('click',()=>{
   closeBigPicture();
-  bigPictureWrap.classList.add('hidden');
 });
 
 function closeBigPicture(){
