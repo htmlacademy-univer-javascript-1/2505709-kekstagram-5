@@ -1,4 +1,5 @@
 export const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) => {
+  sliderContainer.classList.add('hidden');
   noUiSlider.create(sliderElement, {
     range: {
       min: 0,

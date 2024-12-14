@@ -62,7 +62,8 @@ const onDocumentKeydown = (evt) => {
     closeOverlay();
   }
 };
-const showOverlay = () => {
+const showOverlay = (pictureSrc) => {
+  previewImg.src = pictureSrc;
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
@@ -92,7 +93,6 @@ function closeOverlay(){
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-uploadImgBtn.onchange = showOverlay;
 closeOverlayBtn.addEventListener('click', closeOverlay);
 
 scaleWrapper.addEventListener(
@@ -102,4 +102,4 @@ scaleWrapper.addEventListener(
   })
 );
 
-export {closeOverlay, onDocumentKeydown};
+export {closeOverlay, onDocumentKeydown, showOverlay};
