@@ -42,6 +42,7 @@ const getHashtagErrorMessage = (value) => {
   if (hashtags.length > 5) {
     return 'Нельзя указать больше пяти хэш-тегов';
   }
+
   const isValidTag = (tag) =>
     tag.startsWith('#') &&
     tag.length > 1 &&
@@ -50,7 +51,9 @@ const getHashtagErrorMessage = (value) => {
   if (!hashtags.every(isValidTag)) {
     return 'Хэш-тег должен начинаться с # и содержать только буквы и цифры. Максимум 20 символов';
   }
-  const uniqueTags = new Set(hashtags);
+
+  const lowercaseTags = hashtags.map((tag) => tag.toLowerCase());
+  const uniqueTags = new Set(lowercaseTags);
   if (hashtags.length !== uniqueTags.size) {
     return 'Хэш-теги не должны повторяться';
   }

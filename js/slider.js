@@ -24,12 +24,27 @@ const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) =>
         break;
 
       case 'chrome':
+        sliderContainer.classList.remove('hidden');
+        sliderElement.noUiSlider.updateOptions({
+          range: { min: 0, max: 1 },
+          start: 1,
+          step: 0.1,
+        });
+        sliderElement.noUiSlider.on('update', (values, handle) => {
+          const roundedValue = parseFloat(values[handle]).toFixed(1);
+          document.querySelector('.effect-level__value').value = roundedValue;
+        });
+        break;
       case 'sepia':
         sliderContainer.classList.remove('hidden');
         sliderElement.noUiSlider.updateOptions({
           range: { min: 0, max: 1 },
           start: 1,
           step: 0.1,
+        });
+        sliderElement.noUiSlider.on('update', (values, handle) => {
+          const roundedValue = parseInt(values[handle], 10);
+          document.querySelector('.effect-level__value').value = roundedValue;
         });
         break;
 

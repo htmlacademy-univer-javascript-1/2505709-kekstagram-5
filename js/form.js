@@ -1,6 +1,8 @@
 import { initSlider } from './slider.js';
 import { scalePicture } from './scale-picture.js';
+import { pristine} from './form-validation.js';
 
+export {closeOverlay, onDocumentKeydown, showOverlay};
 const form = document.querySelector('.img-upload__form');
 const uploadImgBtn = form.querySelector('#upload-file');
 const body = document.querySelector('body');
@@ -13,8 +15,6 @@ const sliderContainer = document.querySelector('.img-upload__effect-level');
 const effectValue = document.querySelector('.effect-level__value');
 const sliderElement = document.querySelector('.effect-level__slider');
 const effectsFieldset = document.querySelector('.img-upload__effects');
-const hashtagsInput = form.querySelector('.text__hashtags');
-const descriptionInput = form.querySelector('.text__description');
 
 let curImgScale = 1;
 let currentEffect = 'none';
@@ -70,14 +70,17 @@ const showOverlay = (pictureSrc) => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function closeOverlay(){
+
+function closeOverlay(isNeedFullClear = true){
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   uploadImgBtn.value = '';
 
-  previewImg.style.transform = 'scale(1)';
-  scaleValue.value = '100%';
-  curImgScale = 1;
+  if (isNeedFullClear){
+    form.reset();
+    previewImg.style.transform = 'scale(1)';
+    scaleValue.value = '100%';
+    curImgScale = 1;
 
   currentEffect = 'none';
   sliderContainer.classList.add('hidden');
@@ -93,6 +96,9 @@ function closeOverlay(){
   sliderContainer.classList.add('hidden');
   effectsFieldset.querySelector('input').checked = true;
   document.removeEventListener('keydown', onDocumentKeydown);
+
+  pristine.reset();
+
 }
 
 closeOverlayBtn.addEventListener('click', closeOverlay);
