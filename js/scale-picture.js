@@ -11,7 +11,7 @@ function scalePicture(previewImg, scaleValue, getScale, setScale) {
 
     const newScale = getScale() + scaleChange;
     if (newScale >= 0.25 && newScale <= 1) {
-      setScale(newScale); // Обновляем текущий масштаб
+      setScale(newScale);
     }
 
     scaleValue.value = `${getScale() * 100}%`;
