@@ -2,7 +2,6 @@ import { initSlider } from './slider.js';
 import { scalePicture } from './scale-picture.js';
 import { pristine} from './form-validation.js';
 
-export {closeOverlay, onDocumentKeydown, showOverlay};
 const form = document.querySelector('.img-upload__form');
 const uploadImgBtn = form.querySelector('#upload-file');
 const body = document.querySelector('body');
@@ -42,7 +41,6 @@ const applyEffect = (intensity) => {
   }
 };
 
-sliderContainer.classList.add('hidden');
 const updateSliderSettings = initSlider(sliderElement, sliderContainer, effectValue, applyEffect);
 
 effectsFieldset.addEventListener('change', (evt) => {
@@ -82,19 +80,17 @@ function closeOverlay(isNeedFullClear = true){
     scaleValue.value = '100%';
     curImgScale = 1;
 
-  currentEffect = 'none';
-  sliderContainer.classList.add('hidden');
-  sliderElement.noUiSlider.updateOptions({
-    range: { min: 0, max: 100 },
-    start: 100,
-    step: 1,
-  });
-  effectValue.value = '100';
-  previewImg.style.filter = '';
-  hashtagsInput.value = '';
-  descriptionInput.value = '';
-  sliderContainer.classList.add('hidden');
-  effectsFieldset.querySelector('input').checked = true;
+    currentEffect = 'none';
+    sliderElement.noUiSlider.updateOptions({
+      range: { min: 0, max: 100 },
+      start: 100,
+      step: 1,
+    });
+    effectValue.value = '100';
+    previewImg.style.filter = '';
+    sliderContainer.classList.add('hidden');
+    effectsFieldset.querySelector('input').checked = true;
+  }
   document.removeEventListener('keydown', onDocumentKeydown);
 
   pristine.reset();
