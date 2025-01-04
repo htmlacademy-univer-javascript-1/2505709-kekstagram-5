@@ -14,26 +14,36 @@ const sliderContainer = document.querySelector('.img-upload__effect-level');
 const effectValue = document.querySelector('.effect-level__value');
 const sliderElement = document.querySelector('.effect-level__slider');
 const effectsFieldset = document.querySelector('.img-upload__effects');
+const effectsPreviewImgs = document.querySelectorAll('.effects__preview');
 
 let curImgScale = 1;
 let currentEffect = 'none';
 
+
 const applyEffect = (intensity) => {
+  const effects = {
+    chrome: `grayscale(${intensity})`,
+    sepia: `sepia(${intensity})`,
+    marvin: `invert(${intensity}%)`,
+    phobos: `blur(${intensity}px)`,
+    heat: `brightness(${intensity})`,
+  };
+
   switch (currentEffect) {
     case 'chrome':
-      previewImg.style.filter = `grayscale(${intensity})`;
+      previewImg.style.filter = effects.chrome;
       break;
     case 'sepia':
-      previewImg.style.filter = `sepia(${intensity})`;
+      previewImg.style.filter = effects.sepia;
       break;
     case 'marvin':
-      previewImg.style.filter = `invert(${intensity}%)`;
+      previewImg.style.filter = effects.marvin;
       break;
     case 'phobos':
-      previewImg.style.filter = `blur(${intensity}px)`;
+      previewImg.style.filter = effects.phobos;
       break;
     case 'heat':
-      previewImg.style.filter = `brightness(${intensity})`;
+      previewImg.style.filter = effects.heat;
       break;
     case 'none':
       previewImg.style.filter = '';
@@ -66,6 +76,9 @@ const showOverlay = (pictureSrc) => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  effectsPreviewImgs.forEach((effectImg) => {
+    effectImg.style.backgroundImage = `url('${pictureSrc}')`;
+  });
 };
 
 

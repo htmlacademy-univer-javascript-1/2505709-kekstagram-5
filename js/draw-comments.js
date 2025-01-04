@@ -20,9 +20,10 @@ const drawComments = (data) => {
   }
   for (let i = displayedCommentsCnt; i < displayedCommentsCnt + newCommentsCnt;i++){
     const comment = commentSample.cloneNode(true);
+    const commentImg = comment.querySelector('img');
     if (data.comments[i]){
-      comment.querySelector('img').src = data.comments[i].avatar;
-      comment.querySelector('img').alt = data.comments[i].name;
+      commentImg.src = data.comments[i].avatar;
+      commentImg.alt = data.comments[i].name;
       comment.querySelector('p').textContent = data.comments[i].message;
     }
     commentsContainer.appendChild(comment);

@@ -1,4 +1,3 @@
-//всё реализовано в module9-task1
 const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) => {
   sliderContainer.classList.add('hidden');
   noUiSlider.create(sliderElement, {
@@ -18,6 +17,7 @@ const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) =>
   });
 
   const updateSliderSettings = (effect) => {
+    const effectLevel = document.querySelector('.effect-level__value');
     switch (effect) {
       case 'none':
         sliderContainer.classList.add('hidden');
@@ -32,7 +32,7 @@ const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) =>
         });
         sliderElement.noUiSlider.on('update', (values, handle) => {
           const roundedValue = parseFloat(values[handle]).toFixed(1);
-          document.querySelector('.effect-level__value').value = roundedValue;
+          effectLevel.value = roundedValue;
         });
         break;
       case 'sepia':
@@ -44,7 +44,7 @@ const initSlider = (sliderElement, sliderContainer, effectValue, applyEffect) =>
         });
         sliderElement.noUiSlider.on('update', (values, handle) => {
           const roundedValue = parseInt(values[handle], 10);
-          document.querySelector('.effect-level__value').value = roundedValue;
+          effectLevel.value = roundedValue;
         });
         break;
 

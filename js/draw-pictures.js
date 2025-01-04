@@ -3,6 +3,7 @@ import { showAlert } from './util.js';
 import { createRandomIdFromRangeGenerator } from './util.js';
 import { showFilters, setDefaultFilterClick, setRandomFilterClick, setDiscussedFilterClick } from './pictures-filters.js';
 import { debounce } from './util.js';
+import { initBigPicture } from './draw-big-picture.js';
 
 const pictureTemplate = document.querySelector('#picture').content;
 const pictureArea = document.querySelector('.pictures');
@@ -11,10 +12,14 @@ const RERENDER_DELAY = 500;
 
 const createPicture = (pictureData) => {
   const newPicture = pictureTemplate.cloneNode(true);
-  newPicture.querySelector('.picture__img').src = pictureData.url;
-  newPicture.querySelector('.picture__img').alt = pictureData.description;
+  const newPictureImg = newPicture.querySelector('.picture__img');
+  newPictureImg.src = pictureData.url;
+  newPictureImg.alt = pictureData.description;
   newPicture.querySelector('.picture__likes').textContent = pictureData.likes;
   newPicture.querySelector('.picture__comments').textContent = pictureData.comments.length;
+
+  newPictureImg.dataset.id = pictureData.id;
+
   return newPicture;
 };
 
@@ -85,6 +90,7 @@ getData()
   .then((picturesData) => {
     showAllPictures(picturesData);
     showFilters();
+    initBigPicture(picturesData);
     setDefaultFilterClick(debounce(
       () => showAllPictures(picturesData),
       RERENDER_DELAY));
